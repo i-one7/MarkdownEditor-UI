@@ -1,1 +1,1 @@
-# Texteditor-UI
+# Texteditor-UI (Chakra & Quill JS)
