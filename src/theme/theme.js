@@ -2,14 +2,16 @@ import { extendTheme } from '@chakra-ui/react';
 
 const styles = {
 	global: {
-		'#root': {
+		'html, body, #root': {
+			boxSizing: 'border-box',
 			background: 'dark.900',
 			position: 'relative',
-			alignItems: 'center',
 			userSelect: 'none',
 			color: 'gray.400',
-			display: 'flex',
-			h: '100vh',
+			display: 'block',
+			h: '100%',
+			m: 0,
+			p: 0,
 		},
 	},
 };
@@ -32,8 +34,9 @@ const Textarea = {
 			fontSize: '1.1rem',
 			rounded: 'none',
 			resize: 'none',
-			minH: '15rem',
+			bg: 'none',
 			border: 0,
+			h: '100%',
 			px: 4,
 			py: 0,
 			_focus: {
@@ -47,44 +50,58 @@ const Textarea = {
 };
 
 const Tabs = {
-	baseStyle: {
-		tablist: {
-			borderBottom: 0,
-			px: 4
-		},
-		tab: {
-			border: '1.6px dashed transparent',
-			fontWeight: 'semibold',
-			roundedTop: 'md',
-			borderBottom: 0,
-			_selected: {
-				borderColor: 'dark.600',
+	variants: {
+		unstyled: {
+			root: {
+				h: '100%',
+				display: 'block',
+				position: 'relative'
+			},
+			tabpanels: {
+				overflow: 'auto',
 				bg: 'dark.800',
-			}
-		},
-		tabpanel: {
-			borderY: '1.6px dashed',
-			borderColor: 'dark.600',
-			bg: 'dark.800',
-			py: 6,
-			p: 0,
-		},
-	},
+				h: 'xs',
+				'::-webkit-scrollbar': {
+				display: 'none',
+			},
+			},
+			tabpanel: {
+				h: '100%',
+				py: 5,
+				p: 0,
+			},
+			tablist: {
+				borderBottom: 0,
+				px: 4
+			},
+			tab: {
+				fontWeight: 'semibold',
+				roundedTop: 'md',
+				borderBottom: 0,
+				_selected: {
+					borderColor: 'dark.600',
+					bg: 'dark.800',
+				}
+			},
+		}
+	}
 };
 
 const Divider = {
 	variants: {
 		solid: {
-			rounded: 'full',
+			borderColor: 'whiteAlpha.300',
 			borderWidth: '2.2px',
-			my: 3,
+			rounded: 'full',
+			mt: 2,
+			mb: 6,
 		},
 	},
 };
 
 const Button = {
 	baseStyle: {
-		fontWeight: 'normal',
+		fontWeight: 'bold',
 		outline: 'none',
 		rounded: 'full',
 		ml: 0,
@@ -95,7 +112,6 @@ const Button = {
 	},
 	variants: {
 		solid: () => ({
-			bg: 'none',
 			_active: false,
 			_hover: false,
 		}),
