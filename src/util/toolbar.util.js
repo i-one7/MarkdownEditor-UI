@@ -59,7 +59,7 @@ const toolbarEvent = key => {
 		case 'h1':
 			const _h1 = v.substring(0, s) + '# ' + v.substring(e);
 			setFocus(_h1);
-			editor.selectionEnd = e + 3;
+			editor.selectionEnd = e + 2;
 			return _h1;
 
 		case 'h3':

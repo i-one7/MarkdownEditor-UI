@@ -36,9 +36,8 @@ const Textarea = {
 			resize: 'none',
 			bg: 'none',
 			border: 0,
-			h: '100%',
-			px: 4,
-			py: 0,
+			h: 'sm',
+			p: 0,
 			_focus: {
 				boxShadow: 'none',
 			},
@@ -58,14 +57,15 @@ const Tabs = {
 				position: 'relative'
 			},
 			tabpanels: {
-				overflow: 'auto',
 				bg: 'dark.800',
-				h: 'xs',
+				h: 'full',
 				'::-webkit-scrollbar': {
-				display: 'none',
-			},
+					display: 'none',
+				},
 			},
 			tabpanel: {
+				position: 'relative',
+				display: 'block',
 				h: '100%',
 				py: 5,
 				p: 0,
