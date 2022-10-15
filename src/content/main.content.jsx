@@ -1,49 +1,33 @@
-import { Container, Tabs, TabList, Tab, TabPanels, TabPanel, Hide } from "@chakra-ui/react";
-import { Editor, IButton, Widget, Preview, Toolbar } from '../components/@components';
-import { toolbarEvent, toolbarItem } from '../util/toolbar.util';
-import { useState } from 'react';
+import { Widget } from '../components/@components';
+import { Minimize, Maximize } from './@content';
+import { EventContext } from '../util/@util';
+import { Container } from '@chakra-ui/react';
+import { useContext } from 'react';
 
 const Main = () => {
-	const [ value, setValue ] = useState('');
-	const [ tabIndex, setTabIndex ] = useState(0);
-
-	const Toolbars = () => {
-		return (
-			<Toolbar>
-				{
-					toolbarItem.map((v, i) => <IButton
-						click={() => setValue(toolbarEvent(v.type))}
-						sx={{ my: 3, mx: 1, fontSize: '1.3rem' }}
-						icon={v.icon}
-						key={i}
-					/>)
-				}
-			</Toolbar>
-		);
+	const { fullScreen } = useContext(EventContext);
+	const config = {
+		container: {
+			maxW: fullScreen ? 'container.2xl' : 'container.md',
+			display: 'inline-flex',
+			position: 'absolute',
+			inset: 0,
+		},
+		widget: {
+			sx: fullScreen ? {
+				flexDir: 'column',
+				display: 'flex',
+				h: '94%',
+			} : { pt: 4 }
+		}
 	};
 
 	return (
-		<Container maxW={'container.md'} inset={0} display={'inline-flex'} position={'absolute'}>
-			<Widget>
-				<Tabs variant={'unstyled'} index={tabIndex} onChange={ index => setTabIndex(index)}>
-					<TabList>
-						<Tab>write</Tab>
-						<Tab>preview</Tab>
-						<Hide below={'550px'}>
-							{
-								tabIndex === 0 && <Toolbars/>
-							}
-						</Hide>
-					</TabList>
-					<TabPanels>
-						<TabPanel>
-							<Editor defValue={value} onChange={e => setValue(e.target.value)} pholder={ 'write here' }/>
-						</TabPanel>
-						<TabPanel>
-							<Preview children={value} />
-						</TabPanel>
-					</TabPanels>
-				</Tabs>
+		<Container {...config.container}>
+			<Widget {...config.widget}>
+				{
+					fullScreen? <Maximize/> : <Minimize/>
+				}
 			</Widget>
 		</Container>
 	);

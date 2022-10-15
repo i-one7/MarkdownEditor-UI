@@ -4,10 +4,10 @@ const styles = {
 	global: {
 		'html, body, #root': {
 			boxSizing: 'border-box',
-			background: 'dark.900',
+			background: 'dark.800',
 			position: 'relative',
 			userSelect: 'none',
-			color: 'gray.400',
+			color: 'gray.500',
 			display: 'block',
 			h: '100%',
 			m: 0,
@@ -15,19 +15,19 @@ const styles = {
 		},
 	},
 };
-
 const config = {
 	initialColorMode: 'dark',
 	useSystemColorMode: false
 };
-
 const dark = {
-	600: '#65737d',
-	700: '#25282f',
-	800: '#1c1f24',
+	600: '#262a33',
+	700: '#1a1d24',
+	800: '#16181d',
 	900: '#0e1118',
 };
-
+const lightblue = {
+	300: '#1353ec',
+};
 const Textarea = {
 	variants: {
 		outline: {
@@ -36,7 +36,7 @@ const Textarea = {
 			resize: 'none',
 			bg: 'none',
 			border: 0,
-			h: 'sm',
+			h: '100%',
 			p: 0,
 			_focus: {
 				boxShadow: 'none',
@@ -47,7 +47,6 @@ const Textarea = {
 		},
 	},
 };
-
 const Tabs = {
 	variants: {
 		unstyled: {
@@ -57,7 +56,7 @@ const Tabs = {
 				position: 'relative'
 			},
 			tabpanels: {
-				bg: 'dark.800',
+				bg: 'dark.900',
 				h: 'full',
 				'::-webkit-scrollbar': {
 					display: 'none',
@@ -77,20 +76,19 @@ const Tabs = {
 			tab: {
 				fontWeight: 'semibold',
 				roundedTop: 'md',
-				borderBottom: 0,
+				px: 6,
+				py: 2,
 				_selected: {
-					borderColor: 'dark.600',
-					bg: 'dark.800',
+					bg: 'dark.900',
 				}
 			},
 		}
 	}
 };
-
 const Divider = {
 	variants: {
 		solid: {
-			borderColor: 'whiteAlpha.300',
+			borderColor: 'dark.600',
 			borderWidth: '2.2px',
 			rounded: 'full',
 			mt: 2,
@@ -98,7 +96,6 @@ const Divider = {
 		},
 	},
 };
-
 const Button = {
 	baseStyle: {
 		fontWeight: 'bold',
@@ -112,6 +109,7 @@ const Button = {
 	},
 	variants: {
 		solid: () => ({
+			bg: 'none',
 			_active: false,
 			_hover: false,
 		}),
@@ -121,7 +119,7 @@ const Button = {
 // declare custom theme
 const themes = extendTheme({
 	components: { Tabs, Textarea, Divider, Button },
-	colors: { dark },
+	colors: { dark, lightblue },
 	config,
 	styles,
 });

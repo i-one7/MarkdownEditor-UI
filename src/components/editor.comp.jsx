@@ -1,19 +1,17 @@
 import { Box, Textarea } from '@chakra-ui/react';
 
-const config = {
-	rounded: 'md',
-	overflowY: 'scroll',
-	h: '100%',
-	px: 4,
-	sx: {
-		'::-webkit-scrollbar': {
-			display: 'none'
-		},
-	},
-};
-
 const Editor = props => {
-	const { onChange, pholder, defValue } = props;
+	const { onChange, pholder, defValue, sx } = props;
+	const config = {
+		overflowY: 'scroll',
+		sx: sx,
+		px: 4,
+		__css	: {
+			'::-webkit-scrollbar': {
+				display: 'none'
+			},
+		},
+	};
 
 	return (
 		<Box {...config}>

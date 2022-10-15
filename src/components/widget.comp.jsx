@@ -1,21 +1,23 @@
-import { Box } from '@chakra-ui/react';
+import { chakra } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
-const config = {
-	widget: {
-		display: 'block',
+const Box = motion(chakra.div);
+
+const Widget = props => {
+	const { children, sx } = props;
+	const config = {
+		overflow: 'hidden',
+		border: '2px solid',
 		bg: 'dark.700',
+		borderColor: 'dark.600',
 		rounded: 'lg',
 		my: 'auto',
 		w: 'full',
-		py: 6,
-		px: 0,
-	},
-};
+		sx: sx,
+	};
 
-const Widget = props => {
-	const { children } = props;
 	return (
-		<Box {...config.widget}>
+		<Box {...config} layout transition={{ duration: .2 }}>
 			{children}
 		</Box>
 	);

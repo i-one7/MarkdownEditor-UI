@@ -1,11 +1,14 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import Main from './content/main.content';
+import { EventProvider } from './util/@util';
+import { Main } from './content/@content';
 import themes from './theme/theme';
 
 const App = () => {
 	return (
 		<ChakraProvider theme={themes}>
-			<Main/>
+			<EventProvider>
+				<Main />
+			</EventProvider>
 		</ChakraProvider>
 	);
 };

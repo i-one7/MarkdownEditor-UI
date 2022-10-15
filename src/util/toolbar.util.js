@@ -1,17 +1,20 @@
-import { CgFormatHeading, CgFormatSeparator, CgFormatItalic, CgFormatStrike, CgLink } from 'react-icons/cg';
-import { BiBold, BiListOl, BiListUl, BiImage } from 'react-icons/bi';
+import { CgFormatHeading, CgFormatSeparator, CgFormatItalic, CgFormatStrike, CgLink, CgCode, CgFormatText } from 'react-icons/cg';
+import { BiBold, BiListOl, BiListUl } from 'react-icons/bi';
+import { BsFillImageFill } from 'react-icons/bs';
 
 const toolbarItem = [
-	{ type: 'bold', icon: <BiBold /> },
-	{ type: 'italic', icon: <CgFormatItalic /> },
-	{ type: 'strike', icon: <CgFormatStrike /> },
-	{ type: 'h1', icon: <CgFormatHeading /> },
-	{ type: 'h3', icon: <CgFormatHeading fontSize={'1.1rem'} /> },
-	{ type: 'ul', icon: <BiListUl /> },
-	{ type: 'ol', icon: <BiListOl /> },
+	{ type: 'bold', icon: <BiBold/> },
+	{ type: 'italic', icon: <CgFormatItalic/> },
+	{ type: 'strike', icon: <CgFormatStrike/> },
+	{ type: 'h1', icon: <CgFormatHeading/> },
+	{ type: 'h3', icon: <CgFormatHeading fontSize={'1.1rem'}/> },
+	{ type: 'ul', icon: <BiListUl/> },
+	{ type: 'ol', icon: <BiListOl/> },
 	{ type: 'separator', icon: <CgFormatSeparator /> },
-	{ type: 'link', icon: <CgLink /> },
-	{ type: 'image', icon: <BiImage /> },
+	{ type: 'highlight', icon: <CgFormatText /> },
+	{ type: 'code', icon: <CgCode /> },
+	{ type: 'link', icon: <CgLink/> },
+	{ type: 'image', icon: <BsFillImageFill fontSize={'1.1rem'}/> },
 ];
 
 const toolbarEvent = key => {
@@ -19,11 +22,10 @@ const toolbarEvent = key => {
 	let s = editor.selectionStart;
 	let e = editor.selectionEnd;
 	let v = editor.value;
-
 	const setFocus = v => {
 		editor.value = v;
 		editor.focus();
-	}
+	};
 
 	switch (key) {
 		case 'strike':
@@ -37,6 +39,12 @@ const toolbarEvent = key => {
 			setFocus(_italic);
 			editor.selectionEnd = e + 1;
 			return _italic;
+
+		case 'highlight':
+			const _highlight = v.substring(0, s) + '`' + v.substring(s, e) + '`' + v.substring(e);
+			setFocus(_highlight);
+			editor.selectionEnd = e + 1;
+			return _highlight;
 
 		case 'bold':
 			const _bold = v.substring(0, s) + '**' + v.substring(s, e) + '**' + v.substring(e);
@@ -74,16 +82,22 @@ const toolbarEvent = key => {
 			editor.selectionEnd = e + 7;
 			return _link;
 
+		case 'code':
+			const _code = v.substring(0, s) + '~~~language\n\n~~~' + v.substring(e);
+			setFocus(_code);
+			editor.selectionEnd = e + 12;
+			return _code;
+
 		case 'ol':
 			const _ol = v.substring(0, s) + '\n0. ' + v.substring(e);
 			setFocus(_ol);
-			editor.selectionEnd = e + 3;
+			editor.selectionEnd = e + 4;
 			return _ol;
 
 		case 'ul':
 			const _ul = v.substring(0, s) + '\n- ' + v.substring(e);
 			setFocus(_ul);
-			editor.selectionEnd = e + 3;
+			editor.selectionEnd = e + 4;
 			return _ul;
 
 		default:
